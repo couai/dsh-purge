@@ -4,7 +4,7 @@
 import { h, useState, useCallback } from "../shared/react.js";
 import { PURGE_CSS, NATIVE_CSS, PAGE_CSS } from "../styles/index.js";
 import { compatibilityLevelText, useT } from "../shared/locale.js";
-import { RewindSetting } from "./rewind-setting.js";
+import { InjectSettings } from "./inject-settings.js";
 import { Btn, HelpTip } from "./primitives.js";
 import { patchEvidence, patchGroupCounts } from "./patch-status.js";
 import { PurgifySection } from "./settings-form.js";
@@ -282,6 +282,7 @@ export function PurgePage() {
         "div",
         { hidden: tab !== "prompt", className: "dshpp-sec" },
         visited.prompt ? h(PurgifySection, { page: "prompt" }) : null,
+        visited.prompt ? h(InjectSettings) : null,
       ),
       h(
         "div",
@@ -296,7 +297,6 @@ export function PurgePage() {
       h(
         "div",
         { hidden: tab !== "more", className: "dshpp-sec" },
-        __COMMUNITY__ && tab === "more" ? h(RewindSetting) : null,
         visited.more ? h(PurgifySection, { page: "more" }) : null,
       ),
       tab === "drill"
